@@ -1,0 +1,24 @@
+{
+  "name": "audio-mixer",
+  "private": true,
+  "author": "Nathan GNANKADJA",
+  "version": "0.0.0",
+  "scripts": {
+    "format": "npx prettier --write apps/",
+    "format-check": "npx prettier --check apps/",
+    "app:dev": "cd app && npm run dev",
+    "api:dev": "cd api && npm run start:dev",
+    "dev": "conc -n 'API,APP' -c 'green.bold,blue.bold' -k  'npm run api:dev' 'npm run app:dev'"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.0"
+  },
+  "workspaces": [
+    "app",
+    "api"
+  ]
+}

@@ -1,0 +1,30 @@
+# dependencies
+node_modules
+
+# vscode editor
+.vscode/*
+!.vscode/settings.example.json
+
+# env file
+.env
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
+!.env.example
+
+# config file
+**/config.json
+
+# debug
+npm-debug.log*
+
+#production
+dist
+build
+
+# typescript
+*.tsbuildinfo
+
+# macOS-specific files
+.DS_Store
