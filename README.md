@@ -1,2 +1,2 @@
 # audio-mixer
-A tinny application for mixing multiple audio files into a single file
+A tiny utility to mix multiple audio files from multiple folders into a single audio file
