@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  audio-mixer-redis-server: 
+    image: redis/redis-stack:latest
+    volumes:
+      - ../data/redis-cache:/data
+      - ./redis-stack.conf:/redis-stack.conf
+    ports:
+      - 6999:6379
+      - 8999:8001
+    restart: unless-stopped
+    networks:
+      - default
+
+
+
+

@@ -28,3 +28,10 @@ build
 
 # macOS-specific files
 .DS_Store
+
+# workspace data
+api/workspace/**/*
+
+# redis
+api/redis/redis-stack.conf
+api/data/*
