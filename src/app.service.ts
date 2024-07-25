@@ -1,7 +1,6 @@
 import { InjectQueue } from "@nestjs/bull";
 import { Injectable, Logger } from "@nestjs/common";
 import { Queue } from "bull";
-import * as ffmpeg from "fluent-ffmpeg";
 import {} from "fs";
 import { mkdir, readdir, rm } from "fs/promises";
 import { join } from "path";
@@ -16,7 +15,6 @@ import { isAccessiblePathSync } from "./helper";
 @Injectable()
 export class AppService {
   private logger: Logger;
-  private ffmpegPath: string;
   private secondListMedia: { name: string; path: string }[];
   private secondListPosition = 0;
 
@@ -24,13 +22,10 @@ export class AppService {
     @InjectQueue("audio-processor") private readonly audioTasksQueue: Queue
   ) {
     this.logger = new Logger(AppService.name);
-    this.ffmpegPath = "/usr/bin/ffmpeg";
-    ffmpeg.setFfmpegPath(this.ffmpegPath);
-    this.logger.verbose(`FFMPEG PATH: ${this.ffmpegPath}`);
     this.secondListMedia = [];
-    this.#initSecondListMedia().then((success) => {
-      this.logger.verbose("Second List Media Initialized");
-    });
+    this.#initSecondListMedia().then(() =>
+      this.logger.verbose("Second List Initialized")
+    );
   }
 
   async getMainList() {
@@ -82,6 +77,7 @@ export class AppService {
       const audioFilesPath = files.map((file) => join(listDir, file));
       const filesToMerge: string[] = [];
       let position = 0;
+
       // TODO: Improve ordering algorithm
       while (position <= audioFilesPath.length - 1) {
         if (audioFilesPath.length - position <= 1) {
@@ -108,15 +104,12 @@ export class AppService {
       if (!isAccessiblePathSync(tempDir)) await mkdir(tempDir);
 
       filesToMerge.forEach(async (file, index) => {
-        const job = await this.audioTasksQueue.add("prepare", {
+        await this.audioTasksQueue.add("prepare", {
           tempDir,
           originalFilePath: file,
           outputFileName: `${index}`,
         });
       });
-
-      const waitingJobs = (await this.audioTasksQueue.getWaiting()).length;
-      console.log(waitingJobs);
     }
   }
 

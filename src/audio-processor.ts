@@ -36,8 +36,8 @@ export class AudioProcessor {
         .input(originalFilePath)
         .noVideo()
         .audioCodec("libmp3lame")
-        .audioFilters("aresample=44100") // Assure le taux d'échantillonnage
-        .audioChannels(2) // Assure 2 canaux (stéréo)
+        .audioFilters("aresample=44100")
+        .audioChannels(2)
         .toFormat("mp3")
         .on("end", (success) => {
           this.logger.log(`Converted ${fileName}`);
@@ -83,8 +83,4 @@ export class AudioProcessor {
         .mergeToFile(join(outputDir, outputFileName), tempDir);
     });
   }
-
-  // This processor take an audio list in entry and call prepareAudioFile processor to
-  // handle each file of the list
-  async prepareList() {}
 }
