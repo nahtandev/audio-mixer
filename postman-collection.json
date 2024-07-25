@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "5127397a-df9d-4cc6-b837-18e6cf76f164",
+		"name": "Audio Mixer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12512980"
+	},
+	"item": [
+		{
+			"name": "Get Main List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/main",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"main"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start audio merge task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/start",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prepare audio merge task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/prepare",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"prepare"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reset all task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/reset",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"reset"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		}
+	]
+}
